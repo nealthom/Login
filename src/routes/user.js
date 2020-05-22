@@ -5,6 +5,14 @@ const User = require('../models/user')
 const auth = require('../middleware/auth')
 
 
+router.get('/test',(req,res)=>{
+  try {
+    res.status(200).send({msg:'You got it working my brother'})
+  } catch (error) {
+    res.status(400).send(error)
+  }
+})
+
 router.post('/users',async (req,res)=>{
     try {
         const user = new User(req.body)
