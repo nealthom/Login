@@ -11,8 +11,13 @@ function App() {
   },[])
   const getResults = async () =>{
     try {
-      const response = await axios.get('/test')
-      setResults(response.data.msg)
+      const response = await axios.post('/users',{
+        name:"Roger",
+	      email:"RogerPenrose@gmail.com",
+	      password:"AmandaRandaKanda"
+      })
+      console.log(response.data.user)
+      setResults(response.data.user.name)
     } catch (error) {
       console.log(error)
     }
