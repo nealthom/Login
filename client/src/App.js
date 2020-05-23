@@ -5,32 +5,48 @@ import './App.css';
 
 function App() {
   const [results, setResults] = useState('')
+  const [email,setEmail] = useState('')
+  const [password,setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
 
   useEffect(()=>{
     getResults()
   },[])
+
+
   const getResults = async () =>{
+    setLoading(true)
+
     try {
       const response = await axios.post('/users/login',{
-	      email:"admin@admin.com",
-	      password:"machineadmin"
+	      email,
+	      password
       })
-      console.log(response.data.user)
       setResults(response.data.user.name)
     } catch (error) {
       console.log(error)
     }
+    setLoading(false)
+  }
+
+  const handleLogin = (event) =>{
+    event.preventDefault()
+    getResults()
   }
   return (
     <div>
       <h1>Login</h1>
-      <form>
-      <input type='email' placeholder='email' id='email' required />
+      <form onSubmit={handleLogin}>
+      <input type='email' onChange={event => setEmail(event.target.value)}placeholder='email' id='email' required />
       <label for='email'>Email address</label>
-      <input type='password' placeholder='password' id='password' required />
+      <input type='password'onChange={event => setPassword(event.target.value)} placeholder='password' id='password' required />
       <label for='password'>Password</label>
       <button type='submit'>Login</button>
       </form>
+
+      {loading ? (<div>Loading results...</div>):(
+        <h1>{results}</h1>
+      )}
     </div>
   );
 }
