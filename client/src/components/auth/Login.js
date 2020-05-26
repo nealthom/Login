@@ -17,7 +17,7 @@ export default function Login() {
     try {
       const response = await axios.post("/users/login", {
         email,
-        password,
+        password
       });
       setResults(response.data.user.name);
     } catch (error) {
@@ -26,34 +26,39 @@ export default function Login() {
     setLoading(false);
   };
 
-  const handleLogin = (event) => {
+  const handleLogin = event => {
     event.preventDefault();
     getResults();
   };
   return (
-    <div>
-      <h1>Login and Welcome My Friends</h1>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder="email"
-          id="email"
-          required
-        />
-        <label for="email">Email address</label>
-        <input
-          type="password"
-          onChange={(event) => setPassword(event.target.value)}
-          placeholder="password"
-          id="password"
-          required
-        />
-        <label for="password">Password</label>
-        <button type="submit">Login</button>
-      </form>
+    <div className="header">
+      <div className="header__text-box">
+        <h1 className="heading-primary">
+          <span className="heading-primary--main">Login</span>
+          <span className="heading-primary--sub">My Friend </span>
+        </h1>
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            onChange={event => setEmail(event.target.value)}
+            placeholder="email"
+            id="email"
+            required
+          />
+          <label for="email">Email address</label>
+          <input
+            type="password"
+            onChange={event => setPassword(event.target.value)}
+            placeholder="password"
+            id="password"
+            required
+          />
+          <label for="password">Password</label>
+          <button type="submit">Login</button>
+        </form>
 
-      {loading ? <div>Loading results...</div> : <h1>{results}</h1>}
+        {loading ? <div>Loading results...</div> : <h1>{results}</h1>}
+      </div>
     </div>
   );
 }
