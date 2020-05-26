@@ -37,24 +37,33 @@ export default function Login() {
           <span className="heading-primary--main">Login</span>
           <span className="heading-primary--sub">My Friend </span>
         </h1>
-        <form onSubmit={handleLogin}>
-          <input
-            type="email"
-            onChange={event => setEmail(event.target.value)}
-            placeholder="email"
-            id="email"
-            required
-          />
-          <label for="email">Email address</label>
-          <input
-            type="password"
-            onChange={event => setPassword(event.target.value)}
-            placeholder="password"
-            id="password"
-            required
-          />
-          <label for="password">Password</label>
-          <button type="submit">Login</button>
+        <form onSubmit={handleLogin} className="form">
+          <div className="form__group">
+            <input
+              className="form__input"
+              type="email"
+              onChange={event => setEmail(event.target.value)}
+              placeholder="email"
+              id="email"
+              required
+            />
+            <label for="email">Email address</label>
+          </div>
+
+          <div className="form__group">
+            <input
+              className="form__input"
+              type="password"
+              onChange={event => setPassword(event.target.value)}
+              placeholder="password"
+              id="password"
+              required
+            />
+            <label for="password">Password</label>
+          </div>
+          <button type="submit" className="btn btn--green">
+            Login
+          </button>
         </form>
 
         {loading ? <div>Loading results...</div> : <h1>{results}</h1>}
